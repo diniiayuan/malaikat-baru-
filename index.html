@@ -180,10 +180,10 @@
 
         .nav-icon {
             position: absolute;
-            top: 12px;
+            top: 10px;
             background: white;
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             border-radius: 12px;
             display: flex;
             flex-direction: column;
@@ -193,8 +193,8 @@
             border: 2px solid var(--blue);
             cursor: pointer;
         }
-        .btn-music { left: 12px; }
-        .btn-materi-back { right: 12px; }
+        .btn-music { left: 10px; }
+        .btn-materi-back { right: 10px; }
         .nav-icon small { font-size: 0.5rem; font-weight: bold; margin-top: -2px; }
 
         .score-board { 
@@ -321,6 +321,8 @@
         document.getElementById('game-page').style.display = 'flex';
         window.scrollTo(0,0);
         resetFullGame();
+        
+        // AUTO PLAY SAAT MASUK KE GAME
         music.currentTime = 0; 
         music.play().then(() => {
             updateMusicIcon(true);
@@ -342,7 +344,12 @@
         document.getElementById('score').innerText = score;
         quizData.sort(() => Math.random() - 0.5); 
         loadQuestion();
-        updateMusicIcon(!music.paused);
+        
+        // AUTO PLAY SAAT TEKAN TOMBOL MAIN LAGI
+        music.currentTime = 0;
+        music.play().then(() => {
+            updateMusicIcon(true);
+        }).catch(e => console.log("Audio play blocked"));
     }
 
     function toggleMusic() {
