@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dunia Malaikat - Belajar Jadi Seru!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Fredoka+One&display=swap');
+
+        :root {
+            --pink: #ff8fb1;
+            --blue: #78bcc4;
+            --yellow: #fefdca;
+            --purple: #e5ccff;
+            --bg-color: #f0f9ff;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-color);
+            margin: 0;
+            padding: 10px;
+            color: #444;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #materi-page { display: block; }
+        #game-page { display: none; }
+
+        header {
+            text-align: center;
+            padding: 30px 15px;
+            background: white;
+            border-radius: 35px;
+            margin-bottom: 20px;
+            border-bottom: 8px solid #d0e8f2;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--pink);
+            font-size: clamp(1.8rem, 8vw, 2.8rem);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: var(--blue);
+            font-weight: bold;
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
+            margin-top: 5px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Fredoka One', cursive;
+            background: white;
+            color: var(--pink);
+            padding: 10px 25px;
+            border-radius: 50px;
+            display: table;
+            margin: 25px auto 15px;
+            box-shadow: 0 4px 0px #eee;
+            font-size: clamp(1.1rem, 5vw, 1.4rem);
+        }
+
+        .grid-malaikat {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card-upgraded {
+            background: white;
+            border-radius: 35px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 4px solid #fff;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .name-bubble {
+            background: var(--pink);
+            color: white;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 0px rgba(0,0,0,0.1);
+        }
+
+        .icon-main { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+
+        .task-info {
+            background: #f8fdff;
+            border-radius: 15px;
+            padding: 12px;
+            border: 2px dashed var(--blue);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .table-box {
+            background: white;
+            border-radius: 25px;
+            padding: 15px;
+            overflow-x: auto;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 4px solid var(--yellow);
+        }
+
+        table { width: 100%; border-collapse: collapse; min-width: 350px; }
+        th { background: #fdf6f0; padding: 12px; color: var(--blue); font-size: 0.95rem; }
+        td { padding: 12px; border-bottom: 1px solid #f0f0f0; text-align: center; font-size: 0.9rem; }
+
+        .btn-game-main {
+            display: inline-block; 
+            background: var(--pink); 
+            color: white; 
+            padding: 20px 45px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-family: 'Fredoka One'; 
+            box-shadow: 0 8px 0px #e57a98; 
+            cursor: pointer; 
+            border: none; 
+            font-size: 1.5rem;
+            animation: shake 2.5s infinite ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        #game-page {
+            padding: 20px 10px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+        }
+
+        .game-container {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            padding: 75px 15px 30px;
+            border-radius: 40px;
+            box-shadow: 0 15px 0px #d0e8f2;
+            border: 4px solid var(--pink);
+            position: relative;
+            margin: auto;
+            text-align: center;
+        }
+
+        .nav-icon {
+            position: absolute;
+            top: 15px;
+            background: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 0px #eee;
+            border: 3px solid var(--blue);
+            cursor: pointer;
+        }
+        .btn-music { left: 15px; }
+        .btn-materi-back { right: 15px; }
+
+        .score-board { 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            color: var(--blue); 
+            background: #f0f9ff; 
+            padding: 10px 30px; 
+            border-radius: 50px; 
+            margin: 0 auto 20px auto; 
+            display: inline-block;
+        }
+
+        .question-box { background: #fdf6f0; padding: 20px; border-radius: 30px; border: 3px dashed var(--blue); margin-bottom: 20px; min-height: 100px; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: clamp(1rem, 4.5vw, 1.2rem); }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        
+        .btn-option {
+            background: white; border: 3px solid var(--yellow); padding: 18px 10px; border-radius: 20px;
+            font-family: 'Quicksand', sans-serif; font-weight: bold; box-shadow: 0 6px 0px var(--yellow); cursor: pointer;
+        }
+
+        .btn-nav-game { display: none; margin-top: 20px; background: var(--pink); color: white; border: none; padding: 18px; border-radius: 50px; width: 100%; font-family: 'Fredoka One', cursive; cursor: pointer; box-shadow: 0 6px 0px #e57a98; }
+
+        footer { text-align: center; padding: 40px 10px; width: 100%; }
+        footer p { color: var(--pink); font-weight: bold; font-size: 1.2rem; margin: 0 auto; display: inline-block; }
+
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body ontouchstart="">
+
+<div id="materi-page">
+    <header>
+        <h1>✨ Dunia Malaikat ✨</h1>
+        <p class="subtitle">Yuk, kenalan dengan para Malaikat Allah!</p>
+    </header>
+
+    <div class="section-title">10 Malaikat Utama</div>
+    <div class="grid-malaikat">
+        <div class="card-upgraded"><span class="icon-main">📖</span><div class="name-bubble">Jibril</div><div class="task-info">Menyampaikan wahyu Allah kepada Nabi dan Rasul.</div></div>
+        <div class="card-upgraded"><span class="icon-main">💧</span><div class="name-bubble" style="background: #78bcc4;">Mikail</div><div class="task-info">Mengatur hujan, rezeki, dan tumbuh-tumbuhan.</div></div>
+        <div class="card-upgraded"><span class="icon-main">🎺</span><div class="name-bubble" style="background: #f1c40f;">Israfil</div><div class="task-info">Meniup sangkakala tanda datangnya hari kiamat.</div></div>
+        <div class="card-upgraded"><span class="icon-main">🌿</span><div class="name-bubble" style="background: #a29bfe;">Izrail</div><div class="task-info">Malaikat yang bertugas untuk mencabut nyawa.</div></div>
+        <div class="card-upgraded"><span class="icon-main">❓</span><div class="name-bubble" style="background: #ff7675;">Munkar</div><div class="task-info">Menanya manusia di kubur tentang amal ibadah.</div></div>
+        <div class="card-upgraded"><span class="icon-main">🔍</span><div class="name-bubble" style="background: #55efc4;">Nakir</div><div class="task-info">Bersama Munkar menanyai manusia di alam kubur.</div></div>
+        <div class="card-upgraded"><span class="icon-main">✍️</span><div class="name-bubble" style="background: #fab1a0;">Raqib</div><div class="task-info">Mencatat setiap amal kebaikan kita setiap saat.</div></div>
+        <div class="card-upgraded"><span class="icon-main">📝</span><div class="name-bubble" style="background: #81ecec;">Atid</div><div class="task-info">Mencatat setiap perbuatan buruk yang dilakukan.</div></div>
+        <div class="card-upgraded"><span class="icon-main">🔥</span><div class="name-bubble" style="background: #d63031;">Malik</div><div class="task-info">Menjaga pintu neraka dengan sangat patuh.</div></div>
+        <div class="card-upgraded"><span class="icon-main">🌸</span><div class="name-bubble" style="background: #00b894;">Ridwan</div><div class="task-info">Menjaga pintu surga yang penuh kebahagiaan.</div></div>
+    </div>
+
+    <div class="section-title">Hebatnya Malaikat</div>
+    <div class="table-box">
+        <table>
+            <thead>
+                <tr><th>Pembeda</th><th>Malaikat</th><th>Manusia</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><b>Asal</b></td><td>Cahaya (Nur)</td><td>Tanah</td></tr>
+                <tr><td><b>Ketaatan</b></td><td>Selalu Taat</td><td>Bisa Lalai</td></tr>
+                <tr><td><b>Nafsu</b></td><td>Tidak Punya</td><td>Punya Nafsu</td></tr>
+                <tr><td><b>Tempat</b></td><td>Langit</td><td>Bumi</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="text-align: center; margin: 40px 0;">
+        <button class="btn-game-main" onclick="switchToGame()">🎮 MAIN GAME YUK! 🎮</button>
+    </div>
+
+    <footer><p>Terus berbuat baik ya, anak hebat! ✨</p></footer>
+</div>
+
+<div id="game-page">
+    <div class="game-container" id="main-container">
+        <button onclick="toggleMusic()" class="nav-icon btn-music">
+            <span id="musicStatus">🔇</span><small>MUSIK</small>
+        </button>
+        <div class="nav-icon btn-materi-back" onclick="switchToMateri()">
+            <span>📖</span><small>MATERI</small>
+        </div>
+
+        <h1>🎮 Tebak Malaikat</h1>
+        <div class="score-board">Bintang: <span id="score">0</span> ⭐</div>
+        <div class="question-box" id="question">Memuat soal...</div>
+        <div id="options" class="options-grid"></div>
+        <div id="result-message" style="margin-top:15px; font-weight:bold; min-height:30px;"></div>
+        <button class="btn-nav-game" id="next-btn" onclick="nextQuestion()">Lanjut! ➔</button>
+    </div>
+</div>
+
+<audio id="bgMusic" loop preload="auto"><source src="audiobg.mp3" type="audio/mpeg"></audio>
+<audio id="sfxCorrect" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3" type="audio/mpeg"></audio>
+<audio id="sfxWrong" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3" type="audio/mpeg"></audio>
+<audio id="sfxClap" preload="auto"><source src="Tepuk Tangan  Sound Effect.mp3" type="audio/mpeg"></audio>
+
+<script>
+    const music = document.getElementById('bgMusic');
+    const musicStatus = document.getElementById('musicStatus');
+    const sfxCorrect = document.getElementById('sfxCorrect');
+    const sfxWrong = document.getElementById('sfxWrong');
+    const sfxClap = document.getElementById('sfxClap');
+    
+    let currentLevel = 0; 
+    let score = 0;
+    let initialContainerHTML = ''; 
+
+    window.onload = () => {
+        initialContainerHTML = document.getElementById('main-container').innerHTML;
+    };
+
+    function switchToGame() {
+        document.getElementById('materi-page').style.display = 'none';
+        document.getElementById('game-page').style.display = 'flex';
+        window.scrollTo(0,0);
+        
+        // RESET GAME & MULAI MUSIK DARI AWAL
+        resetFullGame();
+        music.currentTime = 0; 
+        music.play().then(() => {
+            updateMusicIcon(true);
+        }).catch(e => console.log("Menunggu interaksi user"));
+    }
+
+    function switchToMateri() {
+        document.getElementById('game-page').style.display = 'none';
+        document.getElementById('materi-page').style.display = 'block';
+        window.scrollTo(0,0);
+        music.pause(); 
+        updateMusicIcon(false);
+    }
+
+    function resetFullGame() {
+        currentLevel = 0; 
+        score = 0;
+        document.getElementById('main-container').innerHTML = initialContainerHTML;
+        document.getElementById('score').innerText = score;
+        quizData.sort(() => Math.random() - 0.5); 
+        loadQuestion();
+        // Pastikan status ikon diupdate setelah reset HTML
+        updateMusicIcon(!music.paused);
+    }
+
+    function toggleMusic() {
+        if (music.paused) { 
+            music.play(); 
+            updateMusicIcon(true);
+        } else { 
+            music.pause(); 
+            updateMusicIcon(false);
+        }
+    }
+
+    function updateMusicIcon(isPlaying) {
+        const statusSpan = document.getElementById('musicStatus');
+        if (statusSpan) {
+            statusSpan.innerText = isPlaying ? "🔊" : "🔇";
+        }
+    }
+
+    const quizData = [
+        { q: "Siapa malaikat yang menyampaikan Wahyu Allah?", a: "Jibril", options: ["Jibril", "Mikail", "Israfil", "Izrail"] },
+        { q: "Siapa yang bertugas meniup Sangkakala?", a: "Israfil", options: ["Ridwan", "Israfil", "Malik", "Atid"] },
+        { q: "Malaikat pembagi rezeki dan mengatur hujan?", a: "Mikail", options: ["Mikail", "Izrail", "Nakir", "Malik"] },
+        { q: "Malaikat yang mencatat amal baik kita?", a: "Raqib", options: ["Raqib", "Atid", "Jibril", "Mikail"] },
+        { q: "Malaikat yang menjaga pintu Surga?", a: "Ridwan", options: ["Malik", "Ridwan", "Munkar", "Nakir"] },
+        { q: "Siapa malaikat pencabut nyawa?", a: "Izrail", options: ["Izrail", "Israfil", "Jibril", "Ridwan"] },
+        { q: "Malaikat yang mencatat amal buruk?", a: "Atid", options: ["Raqib", "Atid", "Nakir", "Malik"] },
+        { q: "Malaikat penjaga pintu Neraka?", a: "Malik", options: ["Malik", "Ridwan", "Munkar", "Nakir"] },
+        { q: "Siapa malaikat yang bertanya di alam kubur?", a: "Munkar", options: ["Munkar", "Ridwan", "Atid", "Jibril"] },
+        { q: "Teman malaikat Munkar di alam kubur?", a: "Nakir", options: ["Nakir", "Mikail", "Ridwan", "Izrail"] }
+    ];
+
+    function loadQuestion() {
+        const qEl = document.getElementById('question');
+        const oEl = document.getElementById('options');
+        const mEl = document.getElementById('result-message');
+        const nBtn = document.getElementById('next-btn');
+        if(!qEl || !oEl) return;
+        
+        mEl.innerText = ""; 
+        nBtn.style.display = "none";
+        
+        let currentQuiz = quizData[currentLevel];
+        qEl.innerText = currentQuiz.q;
+        oEl.innerHTML = "";
+        let shuffled = [...currentQuiz.options].sort(() => Math.random() - 0.5);
+
+        shuffled.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.innerText = opt;
+            btn.classList.add('btn-option');
+            btn.onclick = () => {
+                document.querySelectorAll('.btn-option').forEach(b => b.disabled = true);
+                if(opt === currentQuiz.a) {
+                    btn.style.background = "#2ecc71"; btn.style.color="white";
+                    mEl.innerText = "Hebat! Kamu Benar! 🎉"; 
+                    sfxCorrect.currentTime = 0;
+                    sfxCorrect.play();
+                    score++; 
+                    document.getElementById('score').innerText = score;
+                } else {
+                    btn.style.background = "#e74c3c"; btn.style.color="white";
+                    mEl.innerText = "Salah 😊 Jawaban yang benar adalah " + currentQuiz.a; 
+                    sfxWrong.currentTime = 0;
+                    sfxWrong.play();
+                }
+                document.getElementById('next-btn').style.display = "block";
+                if(currentLevel === quizData.length - 1) document.getElementById('next-btn').innerText = "Lihat Skor Akhir ✨";
+            };
+            oEl.appendChild(btn);
+        });
+    }
+
+    function nextQuestion() {
+        currentLevel++;
+        if (currentLevel < quizData.length) { 
+            loadQuestion(); 
+        } else {
+            music.pause();
+            updateMusicIcon(false);
+            sfxClap.currentTime = 0;
+            sfxClap.play();
+            document.getElementById('main-container').innerHTML = `
+                <div style="animation: float 4s ease-in-out infinite;">
+                    <h1 style="font-size:2.5rem; margin-bottom:10px;">Yeeay! 🎉</h1>
+                    <div style="font-size:5rem; margin:15px 0;">⭐ ${score}</div>
+                    <p style="font-size:1.1rem">Kamu hebat! Dapat <b>${score}/${quizData.length} bintang</b>.</p>
+                    <button class="btn-nav-game" style="display:block" onclick="resetFullGame()">Main Lagi 🎮</button>
+                    <button class="btn-nav-game" style="display:block; background:#ff8fb1; margin-top:10px;" onclick="switchToMateri()">Kembali Belajar 📖</button>
+                </div>`;
+        }
+    }
+</script>
+
+</body>
+</html>
